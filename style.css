@@ -1,0 +1,15 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.search-container {
+    height: 100%;
+    width: 25%;
+}
+
+.current-conditions {
+    width: 75%;
+    margin: auto;
+}
