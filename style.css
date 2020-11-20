@@ -10,6 +10,13 @@ h1 {
 }
 
 .current-conditions {
-    width: 75%;
-    margin: auto;
+    border: 2px solid black;
+}
+
+ul {
+    list-style: none;
+}
+
+.forecast-div {
+    
 }
