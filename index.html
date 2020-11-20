@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="weather_dashboard/reset.css">
+    <!-- <link rel="stylesheet" href="weather_dashboard/reset.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="style.css">
 
@@ -22,12 +22,12 @@
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
                         </div>
                     </div>
+                    <div id="city-buttons"></div>
             </div>
             <div class="col-lg-8 current-conditions">
-                <h3>City Name</h3>
+                <h3 id="city-name">City Name</h3>
                 <ul>
-                    <li>
-                        Temperature
+                    <li id="temperature">
                     </li>
                     <li>
                         Humidity
