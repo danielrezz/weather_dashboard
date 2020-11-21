@@ -13,6 +13,7 @@ $( document ).ready(function() {
         var APIKey = "186950d5261992f795f01a481c7fd390";
         var city = $("#city-input").val().trim();
         var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial";
+        var date = moment().format("L");
 
 // current weather API
     $.ajax({
@@ -20,12 +21,20 @@ $( document ).ready(function() {
         method: "GET"
       }).then(function(response) {
 
-     var cityName = $("#city-name").text(response.name);
+     var cityName = $("#city-name").text(response.name + " (" + date + ")");
      $("#current-conditions").append(cityName);
+
+     var icon = $("#icon").attr("src", "https://api.openweathermap.org/img/w/" + response.weather[0].icon + ".png");
+     $("#current-conditions").append(icon);
 
      var temperature = $("#temperature").text("Temperature: " + response.main.temp + "°");
      $("#current-conditions").append(temperature);
 
+     var humidity = $("#humidity").text("Humidity: " + response.main.humidity);
+     $("#current-conditions").append(humidity);
+
+     var windSpeed = $("#wind-speed").text("Wind Speed: " + response.wind.speed);
+     $("#current-conditions").append(windSpeed);
 
     });
     };
