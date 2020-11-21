@@ -12,8 +12,11 @@ $( document ).ready(function() {
 
         var APIKey = "186950d5261992f795f01a481c7fd390";
         var city = $("#city-input").val().trim();
+        // var lat = response.coord.lat;
+        // var lon = response.coord.lon;
         var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial";
         var forecastQueryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=imperial";
+        // var uviQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey; 
         var date = moment().format("L");
 
 // current weather API
@@ -29,13 +32,45 @@ $( document ).ready(function() {
      $("#current-conditions").append(icon);
 
      var temperature = $("#temperature").text("Temperature: " + response.main.temp + "°F");
+     temperature.css("list-style", "none");
      $("#current-conditions").append(temperature);
 
      var humidity = $("#humidity").text("Humidity: " + response.main.humidity);
+     humidity.css("list-style", "none");
      $("#current-conditions").append(humidity);
 
      var windSpeed = $("#wind-speed").text("Wind Speed: " + response.wind.speed);
+     windSpeed.css("list-style", "none");
      $("#current-conditions").append(windSpeed);
+
+     var lat = response.coord.lat;
+        var lon = response.coord.lon;
+        var uviQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey; 
+
+        $.ajax({
+            url: uviQueryURL,
+            method: "GET"
+          }).then(function(response) {
+    
+            var uvi = $("#uv-index").text("UV Index: " + response.value);
+            uvi.css("list-style", "none");
+            $("#current-conditions").append(uvi);
+
+            if (response.value < 2) {
+                $(uvi).css("color", "#00e600");
+            } 
+            else if (response.value > 2 && response.value < 6) {
+                $(uvi).css("color", "#f5e600");
+            } 
+            else if (response.value > 6 && response.value < 8) {
+                $(uvi).css("color", "#ff6f00");
+            }
+            else if (response.value > 8) {
+                $(uvi).css("color", "#f11000");
+            }
+    
+    
+          });
 
     });
 
@@ -47,8 +82,6 @@ $( document ).ready(function() {
         url: forecastQueryURL,
         method: "GET"
       }).then(function(response) {
-
-        console.log(response);
 
         var day1 = response.list[5];
         var day2 = response.list[13];
