@@ -41,6 +41,8 @@ $( document ).ready(function() {
 
 // 5 day forecast
 
+    function day5Forecast() {
+
     $.ajax({
         url: forecastQueryURL,
         method: "GET"
@@ -54,6 +56,8 @@ $( document ).ready(function() {
         var day4 = response.list[29];
         var day5 = response.list[37];
         var days = [day1, day2, day3, day4, day5];
+
+        $(".forecast-div").empty();
 
         for (var i = 0; i < days.length; i++) {
 
@@ -80,6 +84,10 @@ $( document ).ready(function() {
         }
 
       });
+
+    };
+
+    day5Forecast();
 
 
     };
