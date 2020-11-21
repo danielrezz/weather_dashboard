@@ -1,22 +1,15 @@
 $( document ).ready(function() {
-    // var APIKey = "186950d5261992f795f01a481c7fd390";
-    // var city = $("#city-input").val().trim();
+
     var cities = [];
 
-    // var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial";
-    // var forecastQueryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=imperial";
-    // figure out lat & lon
-    // var uviQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}"; 
-
+// general function to call the different APIs
     function retrieveCityInfo() {
 
+// variables for the current weather API
         var APIKey = "186950d5261992f795f01a481c7fd390";
         var city = $("#city-input").val().trim();
-        // var lat = response.coord.lat;
-        // var lon = response.coord.lon;
         var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial";
         var forecastQueryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=imperial";
-        // var uviQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey; 
         var date = moment().format("L");
 
 // current weather API
@@ -25,6 +18,8 @@ $( document ).ready(function() {
         method: "GET"
       }).then(function(response) {
 
+        
+// each variable is declared and then dynamically added to HTML
      var cityName = $("#city-name").text(response.name + " (" + date + ")");
      $("#current-conditions").append(cityName);
 
@@ -43,7 +38,9 @@ $( document ).ready(function() {
      windSpeed.css("list-style", "none");
      $("#current-conditions").append(windSpeed);
 
-     var lat = response.coord.lat;
+
+// UVI API within the Current Weather API in order to access lat & lon
+        var lat = response.coord.lat;
         var lon = response.coord.lon;
         var uviQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey; 
 
@@ -51,11 +48,14 @@ $( document ).ready(function() {
             url: uviQueryURL,
             method: "GET"
           }).then(function(response) {
-    
+
+
+// UVI div selected and added to HTML with content
             var uvi = $("#uv-index").text("UV Index: " + response.value);
             uvi.css("list-style", "none");
             $("#current-conditions").append(uvi);
 
+// if else statement to dictate color of UVI based on intensity 
             if (response.value < 2) {
                 $(uvi).css("color", "#00e600");
             } 
@@ -74,7 +74,7 @@ $( document ).ready(function() {
 
     });
 
-// 5 day forecast
+// new function to render 5 day forecast
 
     function day5Forecast() {
 
@@ -83,6 +83,8 @@ $( document ).ready(function() {
         method: "GET"
       }).then(function(response) {
 
+
+// variables to access each day within array, as well as new array to hold days
         var day1 = response.list[5];
         var day2 = response.list[13];
         var day3 = response.list[21];
@@ -90,21 +92,31 @@ $( document ).ready(function() {
         var day5 = response.list[37];
         var days = [day1, day2, day3, day4, day5];
 
+// using .empty to clear out the div when calling on a new city
         $(".forecast-div").empty();
 
+
+// for loop to add cards for each day in array
         for (var i = 0; i < days.length; i++) {
 
+// create div container and add to HTML
             var d = $("<div></div>");
             d.addClass("card bg-light mb-3");
             d.width("18rem");
             $(".forecast-div").append(d);
+
+// create header and add date of specified city; .slice to select only the first 10 characters; added to HTML
             var t = $("<h4></h4>");
             t.text(days[i].dt_txt.slice(0, 10));
             d.append(t);
+
+// retrieving and adding icon 
             var dayIcon = $("<img>");
             dayIcon.attr("src", "https://api.openweathermap.org/img/w/" + days[i].weather[0].icon + ".png");
             dayIcon.width("80px");
             d.append(dayIcon);
+
+// adding paragraph lines of Temp and Humidity from specified city
             var p = $("<p></p>");
             p.addClass("card-text");
             p.text("Temp: " + days[i].main.temp_max + "°F");
@@ -120,8 +132,8 @@ $( document ).ready(function() {
 
     };
 
+// function call to render 5 day forecast upon rendering of current weather forecast 
     day5Forecast();
-
 
     };
 
@@ -142,6 +154,16 @@ $( document ).ready(function() {
         }
     }
 
+// function to switch cities upon click of button in history
+
+//     function citySwitch() {
+//     $(".city-btn").on("click", function(event) {
+//         event.preventDefault();
+
+//         retrieveCityInfo();
+//     });
+// };
+
     // event function when button is clicked
     $("#button-addon2").on("click", function(event) {
         event.preventDefault();
@@ -155,5 +177,6 @@ $( document ).ready(function() {
 
     });
     renderButtons();
+    
 
 });
