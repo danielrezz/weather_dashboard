@@ -18,7 +18,6 @@ $( document ).ready(function() {
         method: "GET"
       }).then(function(response) {
 
-        
 // each variable is declared and then dynamically added to HTML
      var cityName = $("#city-name").text(response.name + " (" + date + ")");
      $("#current-conditions").append(cityName);
@@ -38,7 +37,6 @@ $( document ).ready(function() {
      windSpeed.css("list-style", "none");
      $("#current-conditions").append(windSpeed);
 
-
 // UVI API within the Current Weather API in order to access lat & lon
         var lat = response.coord.lat;
         var lon = response.coord.lon;
@@ -48,7 +46,6 @@ $( document ).ready(function() {
             url: uviQueryURL,
             method: "GET"
           }).then(function(response) {
-
 
 // UVI div selected and added to HTML with content
             var uvi = $("#uv-index").text("UV Index: " + response.value);
@@ -68,21 +65,16 @@ $( document ).ready(function() {
             else if (response.value > 8) {
                 $(uvi).css("color", "#f11000");
             }
-    
-    
-          });
-
+        });
     });
 
 // new function to render 5 day forecast
-
     function day5Forecast() {
 
     $.ajax({
         url: forecastQueryURL,
         method: "GET"
       }).then(function(response) {
-
 
 // variables to access each day within array, as well as new array to hold days
         var day1 = response.list[5];
@@ -94,7 +86,6 @@ $( document ).ready(function() {
 
 // using .empty to clear out the div when calling on a new city
         $(".forecast-div").empty();
-
 
 // for loop to add cards for each day in array
         for (var i = 0; i < days.length; i++) {
@@ -125,11 +116,8 @@ $( document ).ready(function() {
             p2.addClass("card-text");
             p2.text("Humidity: " + days[i].main.humidity + "%");
             d.append(p2);
-
         }
-
       });
-
     };
 
 // function call to render 5 day forecast upon rendering of current weather forecast 
@@ -150,33 +138,24 @@ $( document ).ready(function() {
             c.attr("data-name", cities[i]);
             c.text(cities[i]);
             $("#city-buttons").append(c);
-
         }
+        // $(c).on("click", function(event) {
+        //     event.preventDefault();
+        //     console.log("test");
+            // retrieveCityInfo();
+        // });
     }
-
 // function to switch cities upon click of button in history
 
-//     function citySwitch() {
-//     $(".city-btn").on("click", function(event) {
-//         event.preventDefault();
-
-//         retrieveCityInfo();
-//     });
-// };
 
     // event function when button is clicked
     $("#button-addon2").on("click", function(event) {
         event.preventDefault();
-
         retrieveCityInfo();
-
         var city = $("#city-input").val().trim();
         cities.push(city);
-
-    renderButtons();
+        renderButtons();
 
     });
     renderButtons();
-    
-
 });
