@@ -3,13 +3,12 @@ $( document ).ready(function() {
     var cities = [];
 
 // general function to call the different APIs
-    function retrieveCityInfo() {
+    function retrieveCityInfo(cityValue) {
 
 // variables for the current weather API
         var APIKey = "186950d5261992f795f01a481c7fd390";
-        var city = $("#city-input").val().trim();
-        var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial";
-        var forecastQueryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=imperial";
+        var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityValue + "&appid=" + APIKey + "&units=imperial";
+        var forecastQueryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityValue + "&appid=" + APIKey + "&units=imperial";
         var date = moment().format("L");
 
 // current weather API
@@ -139,20 +138,19 @@ $( document ).ready(function() {
             c.text(cities[i]);
             $("#city-buttons").append(c);
         }
-        // $(c).on("click", function(event) {
-        //     event.preventDefault();
-        //     console.log("test");
-            // retrieveCityInfo();
-        // });
-    }
 // function to switch cities upon click of button in history
-
-
+        $(".city-btn").on("click", function(event) {
+            event.preventDefault();
+            retrieveCityInfo($(this).attr("data-name"));
+            localStorage.setItem(c.attr("data-name"), JSON.stringify(c.text()));
+            localStorage.getItem(cities[i]);
+        });
+    }
     // event function when button is clicked
     $("#button-addon2").on("click", function(event) {
         event.preventDefault();
-        retrieveCityInfo();
         var city = $("#city-input").val().trim();
+        retrieveCityInfo(city);
         cities.push(city);
         renderButtons();
 
