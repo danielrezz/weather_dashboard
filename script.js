@@ -92,7 +92,7 @@ $( document ).ready(function() {
 // create div container and add to HTML
             var d = $("<div></div>");
             d.addClass("card");
-            d.css({"background-color":"grey", "color":"white", "border-style": "solid", "padding": "20px", "display":"inline-block", "margin":"10px"});
+            d.css({"background-color":"#395d89", "color":"white", "border-style": "solid", "padding": "20px", "display":"inline-block", "margin":"10px"});
             d.width("12rem");
             $(".forecast-div").append(d);
 

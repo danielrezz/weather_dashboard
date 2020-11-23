@@ -3,6 +3,9 @@ h1 {
     justify-content: center;
     text-align: center;
     padding: 20px;
+    background-color: midnightblue;
+    color: white;
+    margin-bottom: 20px;
 }
 
 .search-container {
