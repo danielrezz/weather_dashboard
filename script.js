@@ -91,8 +91,9 @@ $( document ).ready(function() {
 
 // create div container and add to HTML
             var d = $("<div></div>");
-            d.addClass("card bg-light mb-3");
-            d.width("18rem");
+            d.addClass("card");
+            d.css({"background-color":"grey", "color":"white", "border-style": "solid", "padding": "20px", "display":"inline-block", "margin":"10px"});
+            d.width("12rem");
             $(".forecast-div").append(d);
 
 // create header and add date of specified city; .slice to select only the first 10 characters; added to HTML
@@ -134,6 +135,7 @@ $( document ).ready(function() {
 
             var c = $("<button>");
             c.addClass("city-btn");
+            c.css({"padding":"5px", "margin":"0px 5px 18px 5px"});
             c.attr("data-name", cities[i]);
             c.text(cities[i]);
             $("#city-buttons").append(c);

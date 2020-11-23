@@ -2,6 +2,7 @@ h1 {
     display: flex;
     justify-content: center;
     text-align: center;
+    padding: 20px;
 }
 
 .search-container {
@@ -11,9 +12,24 @@ h1 {
 
 .current-conditions {
     border: 2px solid black;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    display: block;
+    margin: auto;
 }
 
 ul {
     list-style: none;
     font-size: 20px;
+}
+
+#day-forecast-header {
+    padding: 10px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.forecast-div {
+    margin-left: 25px;
 }
