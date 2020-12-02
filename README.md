@@ -10,7 +10,8 @@
     This a current weather dashboard. If you search for a city, you will receive information on that city's weather including current temperature, UV Index, and 5-day forecast.
 </p>
 
-<img src="Screen Shot 2020-11-21 at 11.04.59 PM.png">
+<img src="Screen Shot 2020-12-02 at 5.55.57 PM.png">
+
 
 
 <p>
