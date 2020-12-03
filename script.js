@@ -7,8 +7,8 @@ $( document ).ready(function() {
 
 // variables for the current weather API
         var APIKey = "186950d5261992f795f01a481c7fd390";
-        var weatherQueryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityValue + "&appid=" + APIKey + "&units=imperial";
-        var forecastQueryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityValue + "&appid=" + APIKey + "&units=imperial";
+        var weatherQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityValue + "&appid=" + APIKey + "&units=imperial";
+        var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityValue + "&appid=" + APIKey + "&units=imperial";
         var date = moment().format("L");
 
 // current weather API
@@ -39,7 +39,7 @@ $( document ).ready(function() {
 // UVI API within the Current Weather API in order to access lat & lon
         var lat = response.coord.lat;
         var lon = response.coord.lon;
-        var uviQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey; 
+        var uviQueryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey; 
 
         $.ajax({
             url: uviQueryURL,
