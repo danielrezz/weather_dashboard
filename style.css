@@ -1,11 +1,21 @@
+.bgcontainer{
+    background-image: url("sky.jpg");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    position: fixed;
+    z-index: -1;
+}
+
 h1 {
+    font-size: 64px;
     display: flex;
     justify-content: center;
     text-align: center;
     padding: 20px;
-    background-color: midnightblue;
+    background-color: #015292;
     color: white;
-    margin-bottom: 20px;
 }
 
 .search-container {
@@ -14,12 +24,15 @@ h1 {
 }
 
 .current-conditions {
+    background-color: rgba(230, 230, 230, 0.589);
     border: 2px solid black;
+    border-radius: 12px;
     width: 50%;
-    padding: 10px;
+    padding: 10px 10px 25px 10px;
     text-align: center;
-    display: block;
+    display: none;
     margin: auto;
+    box-shadow: 2px 1px 10px rgb(41, 41, 41);
 }
 
 ul {
@@ -28,6 +41,8 @@ ul {
 }
 
 #day-forecast-header {
+    display: none;
+    font-size: 38px;
     padding: 10px;
     padding-top: 30px;
     text-align: center;
@@ -35,4 +50,21 @@ ul {
 
 .forecast-div {
     margin-left: 25px;
+}
+
+#button-addon2 {
+    background-color: none;
+    border-style: none;
+}
+
+#button-addon2:hover {
+    background-color: gold;
+}
+
+.card {
+    box-shadow: 4px 2px 5px black;
+}
+
+.city-btn {
+    background-color: rgb(255, 226, 62);
 }

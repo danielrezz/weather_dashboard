@@ -9,7 +9,7 @@ $( document ).ready(function() {
         var APIKey = "186950d5261992f795f01a481c7fd390";
         var weatherQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityValue + "&appid=" + APIKey + "&units=imperial";
         var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityValue + "&appid=" + APIKey + "&units=imperial";
-        var date = moment().format("L");
+        var date = moment().format("LL");
 
 // current weather API
     $.ajax({
@@ -18,22 +18,23 @@ $( document ).ready(function() {
       }).then(function(response) {
 
 // each variable is declared and then dynamically added to HTML
-     var cityName = $("#city-name").text(response.name + " (" + date + ")");
-     $("#current-conditions").append(cityName);
+     var cityName = $("#city-name").text(response.name + " | " + date);
+    //  $("#current-conditions").show();
+     $("#current-conditions").show().append(cityName);
 
      var icon = $("#icon").attr("src", "https://api.openweathermap.org/img/w/" + response.weather[0].icon + ".png");
      $("#current-conditions").append(icon);
 
      var temperature = $("#temperature").text("Temperature: " + response.main.temp + "°F");
-     temperature.css("list-style", "none");
+     temperature.css({"list-style": "none", "font-size": "20px"});
      $("#current-conditions").append(temperature);
 
      var humidity = $("#humidity").text("Humidity: " + response.main.humidity);
-     humidity.css("list-style", "none");
+     humidity.css({"list-style": "none", "font-size": "20px"});
      $("#current-conditions").append(humidity);
 
      var windSpeed = $("#wind-speed").text("Wind Speed: " + response.wind.speed);
-     windSpeed.css("list-style", "none");
+     windSpeed.css({"list-style": "none", "font-size": "20px"});
      $("#current-conditions").append(windSpeed);
 
 // UVI API within the Current Weather API in order to access lat & lon
@@ -48,7 +49,7 @@ $( document ).ready(function() {
 
 // UVI div selected and added to HTML with content
             var uvi = $("#uv-index").text("UV Index: " + response.value);
-            uvi.css("list-style", "none");
+            uvi.css({"list-style": "none", "font-size": "20px"});
             $("#current-conditions").append(uvi);
 
 // if else statement to dictate color of UVI based on intensity 
@@ -85,6 +86,7 @@ $( document ).ready(function() {
 
 // using .empty to clear out the div when calling on a new city
         $(".forecast-div").empty();
+        $("#day-forecast-header").show();
 
 // for loop to add cards for each day in array
         for (var i = 0; i < days.length; i++) {
@@ -92,7 +94,7 @@ $( document ).ready(function() {
 // create div container and add to HTML
             var d = $("<div></div>");
             d.addClass("card");
-            d.css({"background-color":"#395d89", "color":"white", "border-style": "solid", "padding": "20px", "display":"inline-block", "margin":"10px"});
+            d.css({"background-color":"#015292", "color":"white", "text-align": "center", "border-style": "solid", "padding": "20px", "display":"inline-block", "margin":"10px"});
             d.width("12rem");
             $(".forecast-div").append(d);
 
@@ -138,6 +140,7 @@ $( document ).ready(function() {
             c.css({"padding":"5px", "margin":"0px 5px 18px 5px"});
             c.attr("data-name", cities[i]);
             c.text(cities[i]);
+            console.log(cities[i].toString()[0]);
             $("#city-buttons").append(c);
         }
 // function to switch cities upon click of button in history
